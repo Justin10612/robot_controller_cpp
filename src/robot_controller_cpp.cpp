@@ -128,10 +128,7 @@ class RobotController : public rclcpp::Node
 
     void target_status_callback(const std_msgs::msg::Bool::SharedPtr target_msgs) const
     {
-    //   auto out_message = geometry_msgs::msg::Vector3();
-      // Get the cmd vel
-      // Publish data
-    //   wheel_cmd_vel_pub_->publish(out_message);
+        target_state = target_msgs->data;
     }
 
 };
