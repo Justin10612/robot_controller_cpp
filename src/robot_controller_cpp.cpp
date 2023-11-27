@@ -88,6 +88,7 @@ class RobotController : public rclcpp::Node
             case 0:
                 mode_msgs.data = "IDLE";
                 idle_msgs.data = true;
+                idle_bool_pub_->publish(idle_msgs);
                 led_msgs.data = 0;
                 // Switch to Follow mode
                 if(follow_flag==true && target_state==true) robot_state = 1;
@@ -99,6 +100,7 @@ class RobotController : public rclcpp::Node
                 mode_msgs.data = "FOLLOW";
                 led_msgs.data = 1;
                 idle_msgs.data = false;
+                idle_bool_pub_->publish(idle_msgs);
                 // Lose target for 5 sec
                 if(target_state==true){
                     time0 = time(NULL);
@@ -113,6 +115,7 @@ class RobotController : public rclcpp::Node
                 mode_msgs.data = "TELEOP";
                 led_msgs.data = 2;
                 idle_msgs.data = false;
+                idle_bool_pub_->publish(idle_msgs);
                 if(idle_flag==true) robot_state = 0; 
                 break;
             default:
@@ -121,7 +124,6 @@ class RobotController : public rclcpp::Node
 
         // Publish data
         robot_mode_pub_->publish(mode_msgs);
-        idle_bool_pub_->publish(idle_msgs);
         led_state_pub_->publish(led_msgs);
         
     }
