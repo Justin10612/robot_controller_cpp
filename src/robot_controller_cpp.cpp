@@ -104,7 +104,7 @@ class RobotController : public rclcpp::Node
                     time0 = time(NULL);
                 }else{
                     time1 = time(NULL);
-                    if(time1>=(time0+5)) robot_state = 0;
+                    if((time1-time0)>=5) robot_state = 0;
                 }
                 if(idle_flag==true) robot_state = 0;
                 break;
